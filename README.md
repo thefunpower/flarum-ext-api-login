@@ -7,6 +7,7 @@ Install with composer:
 
 ```sh
 composer require thefunpower/flarum-ext-api-login:"*"
+php flarum migrate
 ```
 
 ## Updating
