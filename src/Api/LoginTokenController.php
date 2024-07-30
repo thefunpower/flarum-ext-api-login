@@ -9,7 +9,10 @@ class LoginTokenController extends BaseController
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $this->parseRequest($request);
+        $res = $this->parseRequest($request); 
+        if($res){
+            return $res;
+        }
         return $this->doLogin();
     }
 }

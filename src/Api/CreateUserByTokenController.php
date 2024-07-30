@@ -11,7 +11,10 @@ class CreateUserByTokenController extends BaseController
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $this->parseRequest($request);
+        $res = $this->parseRequest($request); 
+        if($res){
+            return $res;
+        }
         $data = $this->decode_data;
         if(!isset($data['nid']) || !isset($data['name'])) {
             return new JsonResponse(['success' => false, 'message' => 'Lost Params']);

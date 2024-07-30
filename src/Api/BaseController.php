@@ -63,7 +63,7 @@ class BaseController implements RequestHandlerInterface
         $data = base64_decode(urldecode($this->token));
         $this->decode_data = $this->decode($data);
         $this->session = $request->getAttribute('session');
-        $this->parseData($this->decode_data);
+        return $this->parseData($this->decode_data);
     }
 
     protected function doLogin($data = [])
@@ -91,7 +91,7 @@ class BaseController implements RequestHandlerInterface
         if(!$name || !$tag || !$created_at) {
             return new JsonResponse(['success' => false, 'message' => 'Params error']);
         }
-        if($created_at < time() - 600) {
+        if($created_at < time() - 10) {
             return new JsonResponse(['success' => false, 'message' => 'Expire data']);
         }
         if(!$this->rand || $this->rand != $tag) {
