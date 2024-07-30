@@ -42,6 +42,11 @@ function flarum_aes_encode($data = [],$key,$iv){
 using `$url` in your iframe.
 
 
+## Setting 
+
+![](/tmp/1.png)
+
+
 
 
 ## Links
