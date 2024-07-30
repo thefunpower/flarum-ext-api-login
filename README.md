@@ -19,9 +19,21 @@ php flarum cache:clear
 
 ## Create Aes Login Data
 
-~~~  
+`AesEncode` function
+
+~~~   
+function flarum_aes_encode($data = [],$key,$iv){
+    $data = json_encode($data);
+    return @base64_encode(openssl_encrypt($data, 'AES-128-CBC', $key, 1, $iv));
+}
+~~~
+
+Login 
+
+~~~
 $flarum_url = 'http://127.0.0.1:5000';
 $data = [
+    'nid'=>'third_user_id_1001', 
     'name'=>'admin',
     'tag' =>'rand',
     'created_at'=>time(),
@@ -29,25 +41,29 @@ $data = [
 $data  = flarum_aes_encode($data);
 $token = urlencode(base64_encode($data));
 $url   = $flarum_url.'/api/v2/login-token?token='.$token;
-
-
-
-
-function flarum_aes_encode($data = [],$key,$iv){
-    $data = json_encode($data);
-    return @base64_encode(openssl_encrypt($data, 'AES-128-CBC', $key, 1, $iv));
-}
 ~~~
+
+`nid` || `name` must has one
 
 using `$url` in your iframe.
 
+## Register User Account
 
-## Setting 
+~~~
+$flarum_url = 'http://127.0.0.1:5000';
+$data = [
+    'nid'=>'third_user_id_1001',
+    'name'=>'admin',
+    'email'=>'admin@example.com',
+    'tag' =>'rand',
+    'created_at'=>time(),
+];
+$data  = flarum_aes_encode($data);
+$token = urlencode(base64_encode($data));
+$url   = $flarum_url.'/api/v2/login-token?token='.$token;  
+~~~
 
-![](/tmp/1.png)
-
-
-
+`nid` is unique on third platform
 
 ## Links
 

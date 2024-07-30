@@ -1,16 +1,16 @@
 <?php
- 
+
 namespace FeApi\Login;
 
 use Flarum;
 use Flarum\Extend;
-use FeApi\Login\Api\LoginTokenController;
 use Flarum\Event\ConfigureWebApp;
 use Flarum\Frontend\Document;
-
 use Flarum\User\Event\Saving;
 use Flarum\User\User;
 use Flarum\User\Exception\InvalidArgumentException;
+use FeApi\Login\Api\LoginTokenController;
+use FeApi\Login\Api\CreateUserByTokenController;
 
 return [
     (new Extend\Frontend('forum'))
@@ -21,15 +21,8 @@ return [
         ->css(__DIR__.'/less/admin.less'),
     new Extend\Locales(__DIR__.'/locale'),
 
-    (new Extend\View())
-        ->namespace('api_login.templates', __DIR__.'/resources/templates'),
-
-    /**
-    * /api/v2/login-token?username=admin&token=
-    */
     (new Extend\Routes('api'))->get('/v2/login-token', 'v2.login-token', LoginTokenController::class),
-  
+    (new Extend\Routes('api'))->get('/v2/create-user-by-token', 'v2.create-user-by-token', CreateUserByTokenController::class),
+
 
 ];
-
-
