@@ -1,0 +1,6 @@
+api_login:
+  admin:
+    settings:
+      aes_key: 'AES加密的key值'
+      aes_iv: 'AES IV 偏移值'
+      rand: '随机数,用于验证'

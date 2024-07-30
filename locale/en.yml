@@ -1,0 +1,6 @@
+api_login:
+  admin:
+    settings:
+      aes_key: 'AES Key'
+      aes_iv: 'AES IV'
+      rand: 'Rand String For Validate'
