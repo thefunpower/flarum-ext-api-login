@@ -18,6 +18,11 @@ php flarum migrate
 php flarum cache:clear
 ```
 
+## Setting 
+
+![](/tmp/1.png)
+
+
 ## Create Aes Login Data
 
 `AesEncode` function
