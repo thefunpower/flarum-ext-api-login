@@ -17,7 +17,7 @@ class CreateUserByTokenController extends BaseController
         }
         $data = $this->decode_data;
         if(!isset($data['nid']) || !isset($data['name'])) {
-            return new JsonResponse(['success' => false, 'message' => 'Lost Params']);
+            return new JsonResponse(['success' => false, 'message' => $this->lang('api_login.login.Lost Params')]);
         }
         $data = $this->register();
         return $this->doLogin($data);

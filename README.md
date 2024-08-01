@@ -66,6 +66,12 @@ $url   = $flarum_url.'/api/v2/login-token?token='.$token;
 
 `nid` is unique on third platform
 
+## Logout 
+
+~~~
+/api/v2/logout
+~~~
+
 ## Links
 
 - [Packagist](https://packagist.org/packages/thefunpower/flarum-ext-api-login)

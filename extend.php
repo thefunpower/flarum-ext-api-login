@@ -11,6 +11,7 @@ use Flarum\User\User;
 use Flarum\User\Exception\InvalidArgumentException;
 use FeApi\Login\Api\LoginTokenController;
 use FeApi\Login\Api\CreateUserByTokenController;
+use FeApi\Login\Api\LogoutController;
 
 return [
     (new Extend\Frontend('forum'))
@@ -23,6 +24,7 @@ return [
 
     (new Extend\Routes('api'))->get('/v2/login-token', 'v2.login-token', LoginTokenController::class),
     (new Extend\Routes('api'))->get('/v2/create-user-by-token', 'v2.create-user-by-token', CreateUserByTokenController::class),
+    (new Extend\Routes('api'))->get('/v2/logout', 'v2.logout', LogoutController::class),
 
 
 ];

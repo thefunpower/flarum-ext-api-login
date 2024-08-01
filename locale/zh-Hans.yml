@@ -3,4 +3,15 @@ api_login:
     settings:
       aes_key: 'AES加密的key值'
       aes_iv: 'AES IV 偏移值'
-      rand: '随机数,用于验证'
+      rand: '随机数,用于验证' 
+  login: 
+    NotLogin: '未登录'
+    Logout Success: '退出成功'
+    Lost Params: '缺少必要的参数'
+    Params Error: '参数异常'
+    Expire Data: '请求超时'
+    Validate Failed: '数据验证失败'
+    Login Failed: '登录失败'
+    Login Successful: '登录成功'
+    Please setting aes key: '请在插件后台配置AES加密key值'
+    Lost token params: '请求缺少必要参数token'

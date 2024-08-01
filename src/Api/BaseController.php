@@ -55,10 +55,10 @@ class BaseController implements RequestHandlerInterface
         $aes_iv  = $this->settings->get("api_login.aes_iv");
         $this->rand    = $this->settings->get("api_login.rand");
         if(!$aes_key || !$aes_iv) {
-            return new JsonResponse(['success' => false, 'message' => 'Please setting aes key']);
+            return new JsonResponse(['success' => false, 'message' => $this->lang('api_login.login.Please setting aes key')]);
         }
         if(!$this->token) {
-            return new JsonResponse(['success' => false, 'message' => 'Lost token params']);
+            return new JsonResponse(['success' => false, 'message' => $this->lang('api_login.login.Lost token params')]);
         }
         $data = base64_decode(urldecode($this->token));
         $this->decode_data = $this->decode($data);
@@ -77,10 +77,10 @@ class BaseController implements RequestHandlerInterface
         }
 
         if(!$user) {
-            return new JsonResponse(['success' => false, 'message' => 'Login failed']);
+            return new JsonResponse(['success' => false, 'message' => $this->lang('api_login.login.Login Failed')]);
         }
         $this->authenticator->logIn($this->session, SessionAccessToken::generate($user->id));
-        return new JsonResponse(['success' => true, 'message' => 'Login successful']);
+        return new JsonResponse(['success' => true, 'message' => $this->lang('api_login.login.Login Successful')]);
     }
 
     protected function parseData($data)
@@ -89,13 +89,13 @@ class BaseController implements RequestHandlerInterface
         $tag = $data['tag'] ?? '';
         $created_at = $data['created_at'] ?? '';
         if(!$name || !$tag || !$created_at) {
-            return new JsonResponse(['success' => false, 'message' => 'Params error']);
+            return new JsonResponse(['success' => false, 'message' => $this->lang('api_login.login.Params Error')]);
         }
         if($created_at < time() - 10) {
-            return new JsonResponse(['success' => false, 'message' => 'Expire data']);
+            return new JsonResponse(['success' => false, 'message' => $this->lang('api_login.login.Expire Data')]);
         }
         if(!$this->rand || $this->rand != $tag) {
-            return new JsonResponse(['success' => false, 'message' => 'Validate  failed']);
+            return new JsonResponse(['success' => false, 'message' => $this->lang('api_login.login.Validate Failed')]);
         }
     }
 
@@ -110,5 +110,9 @@ class BaseController implements RequestHandlerInterface
         return @base64_encode(openssl_encrypt($data, 'AES-128-CBC', $this->key, 1, $this->iv));
     }
 
-
+    protected function lang($key){
+        // zh-Hans
+        $locale = $this->translator->getLocale(); 
+        return $this->translator->trans($key);
+    }
 }
